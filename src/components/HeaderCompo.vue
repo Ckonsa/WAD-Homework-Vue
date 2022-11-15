@@ -1,8 +1,8 @@
 <template>
     <header>
-        <a class="active" href="index.html">HOME</a>
-        <a href="pages/addPost.html">ADD POST</a>
-        <a href="pages/login.html">LOGIN</a>
+        <router-link to="/">HOME</router-link>
+        <router-link to="/">ADD POST</router-link>
+        <router-link to="/signup">LOGIN</router-link>
         <div class="dropdown">
             <img class="icon" src="../assets/images/student.png" alt="Icon">
             <div class="dropdown_list">
