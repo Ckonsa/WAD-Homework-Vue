@@ -4,11 +4,13 @@
         <router-link to="/">ADD POST</router-link>
         <router-link to="/signup">LOGIN</router-link>
         <div class="dropdown">
-            <img class="icon" src="../assets/images/student.png" alt="Icon">
-            <div class="dropdown_list">
+            <img class="icon" src="@/assets/images/student.png" alt="Icon" @click="toggle">
+            <div class="dropdown_list" v-if="showList">
+              <ul>
                 <li>Martha Doe</li>
                 <li>martha.doe@gmail.com</li>
                 <li>Logout</li>
+              </ul>
             </div>
         </div>
     </header>
@@ -18,9 +20,14 @@
     export default {
         data() {
             return {
-
-    }
-}
+              showList: false
+            }
+        },
+        methods: {
+          toggle() {
+            this.showList = !this.showList
+          }
+        }
 }
 </script>
 
@@ -101,7 +108,7 @@ header>.icon {
 }
 
 .dropdown_list {
-    display: none;
+    /*display: none;*/
     position: relative;
     float: left;
     right: 88px;

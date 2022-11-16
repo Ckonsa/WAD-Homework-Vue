@@ -3,7 +3,7 @@
     <div class="flexbox-container">
         <SideCompo></SideCompo>
         <div class="posts-container">
-        <PostCompo :postsList="postsList"></PostCompo>
+        <PostCompo2></PostCompo2>
         </div>
         <SideCompo></SideCompo>
     </div>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import HeaderCompo from '../components/HeaderCompo.vue'
-import FooterCompo from '../components/FooterCompo.vue'
-import SideCompo from '../components/SideCompo.vue'
-import PostCompo from '../components/PostCompo.vue'
+import HeaderCompo from '@/components/HeaderCompo.vue'
+import FooterCompo from '@/components/FooterCompo.vue'
+import SideCompo from '@/components/SideCompo.vue'
+import PostCompo2 from '@/components/PostCompo2.vue'
 
 export default {
   name: "MainView",
@@ -22,14 +22,12 @@ export default {
     HeaderCompo,
     FooterCompo,
     SideCompo,
-    PostCompo
+    PostCompo2
   },
-  data: function() {
-    return {
-      postsList: [
-        {id: 1, authorIcon: "../assets/images/student3.png",createTime: "Oct 20, 2022",text: "OOPS! Seems like I'm a little late:(((",image: "../assets/images/postImage2.jpg"},
-        {id: 2, authorIcon: "../assets/images/student2.png",createTime: "Oct 22, 2022",text: "Anyone knows in which room is the lab today!?",image: null}
-      ]}}}
+  data: function () {
+    return {}
+  }
+}
 </script>
 
 <style scoped>

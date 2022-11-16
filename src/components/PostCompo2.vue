@@ -1,39 +1,52 @@
 <template>
-    <div class="post" v-for="postItem in postsList" :key="postItem.id">
-        <div class="post-top">
-            <img class="icon" :src="postItem.authorIcon" alt="Icon">
-            <p class="date">{{postItem.createTime}}</p>
-        </div>
+  <div class="post" v-for="postItem in postsList" :key="postItem.id">
+      <div class="post-top">
+        <img class="icon" :src="postItem.authorIcon" alt="Icon">
+        <p class="date">{{postItem.createTime}}</p>
+      </div>
 
-    <div class="post-content">
-        <img :src="postItem.image" alt="Content Image">
+      <div class="post-content">
+        <img v-if="postItem.postimage!=null" :src=postItem.postimage alt="Content Image">
         <p>{{postItem.text}}</p>
-    </div>
-
+      </div>
     <div class="post-bottom">
-        <div class="comment-container">
-            <img class="icon" src="@/assets/images/student.png" alt="Icon">
-            <input class="comment" type="text" placeholder="Write a comment...">
-        </div>
-            <img src="@/assets/images/like-icon.png" alt="Like Button">
-        </div>
+      <div class="comment-container">
+        <img class="icon" src="@/assets/images/student.png" alt="Icon">
+        <input class="comment" type="text" placeholder="Write a comment...">
+      </div>
+        <img @click="increment(postItem.id)" src="@/assets/images/like-icon.png" alt="Like Button">
+      <p class="date">{{ postItem.likes }}</p>
     </div>
+  </div>
+  <button class="resetLikesButton" @click="resetLikes">Reset likes</button>
 </template>
 
 <script>
 export default {
-name: "PostCompo",
-props: ["postsList"],
+name: "PostCompo2",
 data: function() {
-return {
-}},
-computed: {
-}
+  return {
+  }},
+  computed: {
+    postsList() {
+      return this.$store.state.postsList
+    }
+  },
+  methods: {
+    increment(postID) {
+      this.$store.commit("increment", postID)
+    },
+    resetLikes() {
+      this.$store.commit("resetLikes")
+    }
+  }
 }
 </script>
 
 
 <style scoped>
+.resetLikesButton {}
+
 .post {
     background-color: var(--almost-white);
     border-style: solid;
