@@ -14,8 +14,10 @@
         <img class="icon" src="@/assets/images/student.png" alt="Icon">
         <input class="comment" type="text" placeholder="Write a comment...">
       </div>
+      <div class="likes">
         <img @click="increment(postItem.id)" src="@/assets/images/like-icon.png" alt="Like Button">
-      <p class="date">{{ postItem.likes }}</p>
+        <p>{{ postItem.likes }}</p>
+      </div>
     </div>
   </div>
   <button class="resetLikesButton" @click="resetLikes">Reset likes</button>
@@ -45,7 +47,18 @@ data: function() {
 
 
 <style scoped>
-.resetLikesButton {}
+
+.resetLikesButton {
+  margin-left: 42%;
+  text-align: center;
+  display:table-cell;
+  vertical-align:middle;
+  width: 100px;
+  height: 30px;
+  background-color: var(--post-top-bottom-blue);
+  border-color: var(--post-top-bottom-blue);
+  border-radius: 10px;
+}
 
 .post {
     background-color: var(--almost-white);
@@ -116,6 +129,21 @@ data: function() {
 .post-content > img {
     width: 100%;
     object-fit: contain;
+}
+
+.likes {
+  padding-right: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.likes > img {
+  width: 40px;
+  height: 40px;
+  padding-bottom: 10px;
+  padding-right: 5px;
 }
 
 @media screen and (max-width: 480px) {

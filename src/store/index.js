@@ -7,13 +7,13 @@ export default createStore({
             {id: 1, authorIcon: require("@/assets/images/student2.png"),createTime: "Oct 20, 2022", text: "OOPS! Seems like I'm a little late:(((", postimage: require("@/assets/images/postImage2.jpg"), likes: 0},
             {id: 2, authorIcon: require("@/assets/images/student3.png"),createTime: "Oct 22, 2022", text: "Anyone knows in which room is the lab today!?", postimage: null, likes: 23},
             {id: 3, authorIcon: require("@/assets/images/student.png"),createTime: "Oct 22, 2022", text: "My table is so crowded", postimage: require("@/assets/images/postImage.jpg"), likes: 10},
-            {id: 4, authorIcon: require("@/assets/images/sleeping-man.jpg"),createTime: "Oct 22, 2022", text: "I was thinking about starting a sleeping blog, what do you guys think?", postimage: null, likes: 14},
+            {id: 4, authorIcon: require("@/assets/images/student5.png"),createTime: "Oct 22, 2022", text: "I was thinking about starting a sleeping blog, what do you guys think?", postimage: null, likes: 14},
             {id: 5, authorIcon: require("@/assets/images/student3.png"),createTime: "Oct 22, 2022", text: "Sorry, forgot to add it to the last post haha", postimage: require("@/assets/images/sleeping-man.jpg"), likes: 56},
             {id: 6, authorIcon: require("@/assets/images/student3.png"),createTime: "Oct 22, 2022", text: "Did you guys see the new photo?", postimage: null, likes: 3},
-            {id: 7, authorIcon: require("@/assets/images/sleeping-man.jpg"),createTime: "Oct 22, 2022", text: "I made my profile picture the one that was taken of me sleeping haha", postimage: null, likes: 64},
+            {id: 7, authorIcon: require("@/assets/images/student5.png"),createTime: "Oct 22, 2022", text: "I made my profile picture the one that was taken of me sleeping haha", postimage: null, likes: 64},
             {id: 8, authorIcon: require("@/assets/images/student.png"),createTime: "Oct 22, 2022", text: "Look at this funny pic I took of James!", postimage: require("@/assets/images/sleeping-man.jpg"), likes: 99},
             {id: 9, authorIcon: require("@/assets/images/student2.png"),createTime: "Oct 22, 2022", text: "Why do I keep missing my class???", postimage: null, likes: 3},
-            {id: 10, authorIcon: require("@/assets/images/student4.jpg"),createTime: "Oct 22, 2022", text: "Look, a pic of my cat!!", postimage: require("@/assets/images/kitten.jpg"), likes: 100}
+            {id: 10, authorIcon: require("@/assets/images/student4.png"),createTime: "Oct 22, 2022", text: "Look, a pic of my cat!!", postimage: require("@/assets/images/kitten.jpg"), likes: 100}
         ]},
     getters: {},
     mutations: {

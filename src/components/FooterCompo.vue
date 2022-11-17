@@ -1,6 +1,7 @@
 <template>
 <footer>
 <a href="#">CONTACT</a>
+<p>@Copyright 2022. Team 29.</p>
 </footer>
 </template>
 
@@ -36,5 +37,10 @@ footer a:hover {
     background-color: var(--header-footer-hover-blue);
     color: var(--dark-blue);
     border-radius: 15px;
+}
+
+footer p {
+    font-size: 14px;
+    color: var(--dark-blue);
 }
 </style>
