@@ -1,20 +1,16 @@
 <template>
-    <div class="sides">
-        <p></p>
-    </div>
+<div class="sides"></div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-
+export default {
+    data() {
+        return {}
     }
-}
 }
 </script>
 
-<style>
+<style scoped>
 .sides {
     align-self: stretch;
     background-color: var(--sides-blue);
@@ -22,5 +18,10 @@
     margin: 10px 0;
     padding: 20px;
     border-radius: 5px;
+}
+@media screen and (max-width: 480px) {
+.sides {
+    display: none;
+}
 }
 </style>

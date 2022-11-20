@@ -3,7 +3,7 @@
     <div class="flexbox-container">
         <SideCompo></SideCompo>
         <div class="posts-container">
-        <PostCompo2></PostCompo2>
+        <PostCompo></PostCompo>
         </div>
         <SideCompo></SideCompo>
     </div>
@@ -14,7 +14,7 @@
 import HeaderCompo from '@/components/HeaderCompo.vue'
 import FooterCompo from '@/components/FooterCompo.vue'
 import SideCompo from '@/components/SideCompo.vue'
-import PostCompo2 from '@/components/PostCompo2.vue'
+import PostCompo from '@/components/PostCompo.vue'
 
 export default {
   name: "MainView",
@@ -22,7 +22,7 @@ export default {
     HeaderCompo,
     FooterCompo,
     SideCompo,
-    PostCompo2
+    PostCompo
   },
   data: function () {
     return {}
@@ -50,5 +50,4 @@ export default {
         row-gap: 10px;
     }
 }
-
 </style>

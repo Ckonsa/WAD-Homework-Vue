@@ -11,10 +11,9 @@ import HeaderCompo from "@/components/HeaderCompo";
 import FooterCompo from "@/components/FooterCompo";
 import SignupCompo from "@/components/SignupCompo";
 export default {
-    name: "SignupView",
-  components: {FooterCompo, HeaderCompo, SignupCompo},
+  name: "SignupView",
+  components: {HeaderCompo, SignupCompo, FooterCompo},
 }
-
 </script>
 
   <style scoped>
@@ -23,12 +22,9 @@ export default {
       display: flex;
       flex-direction: column;
       height: 70%;
-      /* max-width: 700px; */
       align-content: center;
       justify-self: center;
-      margin-top: 50px;
-      margin-left: 15%;
-      margin-right: 15%;
+      margin: 50px;
       background-color: var(--post-top-bottom-blue);
       border-radius: 15px;
       border: none;
