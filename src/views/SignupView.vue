@@ -24,9 +24,15 @@ export default {
       height: 70%;
       align-content: center;
       justify-self: center;
-      margin: 50px;
+      margin: 50px 20% 50px 20%;
       background-color: var(--post-top-bottom-blue);
       border-radius: 15px;
       border: none;
   }
+
+  @media screen and (max-width: 550px) {
+  .signup-container {
+        margin: 50px;
+    }
+}
 </style>
