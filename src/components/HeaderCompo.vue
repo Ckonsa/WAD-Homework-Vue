@@ -3,6 +3,8 @@
         <router-link to="/">HOME</router-link>
         <!-- <router-link to="/">ADD POST</router-link> -->
         <router-link to="/signup">REGISTER</router-link>
+        <router-link to="/contact">CONTACT</router-link>
+        <!--
         <div class="dropdown">
             <img class="icon" src="@/assets/images/student.png" alt="Icon" @click="toggle">
             <div class="dropdown_list" v-if="showList">
@@ -13,6 +15,7 @@
             </ul>
             </div>
         </div>
+         -->
     </header>
 </template>
 

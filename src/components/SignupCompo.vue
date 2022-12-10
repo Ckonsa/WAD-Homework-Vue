@@ -11,6 +11,10 @@
     <div v-if="invalidPasswordMsg" class="invalid-password-message">{{invalidPasswordMsg}}</div>
     <input type="submit" value="Signup" class="btn btn-block" />
 </form>
+<div class="toLoginSection">
+    <p>Already have an account?</p>
+    <button class="goToLogin"><router-link to="/login"><a>Login</a></router-link></button>
+</div>
 </template>
 
 <script>
@@ -67,6 +71,7 @@
     align-items: center;
     text-align: center;
     margin: 50px;
+    margin-bottom: 0;
 }
 .form-control {
     display: flex;
@@ -99,6 +104,29 @@ input[type=submit] {
     line-break: strict;
     color: #6b1127;
 }
+.toLoginSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-bottom: 20px;
+}
+a {
+        text-decoration: none;
+        color: white;
+        font-size: 22px;
+}
+.goToLogin {
+        background-color: var(--header-footer-blue);
+        border: 1px solid black;
+        padding: 3px;
+        width: 50%;
+        cursor: pointer;
+}
+
 @media screen and (max-width: 375px) {
 .form-control {
     flex-direction: column;
