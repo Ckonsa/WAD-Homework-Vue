@@ -1,29 +1,31 @@
 <template>
     <header>
         <router-link to="/">HOME</router-link>
-        <!-- <router-link to="/">ADD POST</router-link> -->
+        <router-link v-if="authResult === true" to="/">ADD POST</router-link>
         <router-link to="/signup">REGISTER</router-link>
         <router-link to="/contact">CONTACT</router-link>
-        <!--
-        <div class="dropdown">
-            <img class="icon" src="@/assets/images/student.png" alt="Icon" @click="toggle">
+        <div v-if="authResult === true" class="dropdown">
+            <img class="icon" src="@/assets/images/default-account.png" alt="Icon" @click="toggle">
             <div class="dropdown_list" v-if="showList">
             <ul>
-                <li>Martha Doe</li>
-                <li>martha.doe@gmail.com</li>
-                <li>Logout</li>
+                <!--<li>Martha Doe</li>-->
+                <li>john.doe@gmail.com</li>
+                <!--<li>Logout</li>-->
             </ul>
             </div>
         </div>
-         -->
     </header>
 </template>
 
 <script>
+import auth from "../auth";
+
     export default {
+        name: "HeaderCompo",
         data() {
             return {
-                showList: false
+                showList: false,
+                authResult: auth.authenticated()
             }
         },
         methods: {
@@ -75,7 +77,7 @@ header a:hover {
     right: 154px;
     top: 10px;
     padding-right: 35px;
-    min-height: 120px;
+    /*min-height: 120px;*/
     box-shadow: 0px 8px 16px 0px rgba(12, 3, 39, 0.742);
     background-color: var(--post-top-bottom-blue);
     border-radius: 5px;

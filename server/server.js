@@ -20,6 +20,27 @@ const generateJWT = (id) => {
     return jwt.sign({ id }, secret, { expiresIn: maxAge })
 }
 
+app.get('/auth/authenticate', async(req, res) => {
+    const token = req.cookies.jwt;
+    let authenticated = false; 
+    try {
+        if (token) {
+            await jwt.verify(token, secret, (err) => { 
+                if (err) { 
+                    res.send({ "authenticated": authenticated }); // authenticated = false
+                } else { 
+                    authenticated = true;
+                    res.send({ "authenticated": authenticated }); // authenticated = true
+                }
+            })
+        } else { 
+            res.send({ "authenticated": authenticated }); // authenticated = false
+        }
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
+});
+
 app.post('/api/posts', async(req, res) => {
     try {
         console.log("a post request has arrived");
