@@ -1,6 +1,6 @@
 <template>
 <footer>
-<a href="#">CONTACT</a>
+<router-link to="/contact">CONTACT</router-link>
 <p>&copy; Copyright 2022 Team 29. All Rights Reserved</p>
 </footer>
 </template>
