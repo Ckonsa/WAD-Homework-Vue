@@ -1,5 +1,5 @@
 <template>
-<form @submit.prevent="validateSignup" class="signup-form">
+<form class="signup-form">
     <div class="form-control">
     <label for="email">Email</label>
     <input type="email" v-model="email" placeholder="e.g. martha.doe@gmail.com" required />
@@ -9,7 +9,7 @@
     <input type="password" v-model="password" placeholder="e.g. C2VE+td#wZ_m4" required/>
     </div>
     <div v-if="invalidPasswordMsg" class="invalid-password-message">{{invalidPasswordMsg}}</div>
-    <input type="submit" value="Signup" class="btn btn-block" />
+    <input @click="signUp" type="submit" value="Signup" class="btn btn-block" />
 </form>
 <div class="toLoginSection">
     <p>Already have an account?</p>
@@ -20,11 +20,17 @@
 <script>
     export default {
         name : 'SignupCompo',
-        data (){
+        data: function() {
             return {
                 email : '',
                 password : '',
                 invalidPasswordMsg : '',
+            }
+        },
+        watch: {
+            password(value) {
+                this.password = value;
+                this.validateSignup(value);
             }
         },
         methods : {
@@ -57,6 +63,27 @@
                 if (!regex_line.test(this.password)) {
                     this.invalidPasswordMsg += "Password must contain a character '_'.\n"
                 }
+            },
+            signUp() {
+                var data = {
+                    email: this.email,
+                    password: this.password
+                };
+                fetch("http://localhost:3000/auth/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then(() => {
+                    this.$router.push("/");
+                })
+                .catch((e) => {
+                    console.log("Error "+e);
+                })
             }
         }
     }
