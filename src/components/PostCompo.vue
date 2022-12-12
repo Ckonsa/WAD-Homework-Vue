@@ -1,13 +1,13 @@
 <template>
-  <div class="post" v-for="postItem in postsList" :key="postItem.id">
+  <div class="post" v-for="postItem in postList" :key="postItem.id">
       <div class="post-top">
-        <img class="icon" :src="postItem.authorIcon" alt="Icon">
-        <p>{{postItem.createTime}}</p>
+        <img class="icon" :src="postItem.authoricon" alt="Icon">
+        <p>{{ postItem.createtime }}</p>
       </div>
 
       <div class="post-content">
-        <img v-if="postItem.postimage!=null" :src=postItem.postimage alt="Content Image">
-        <p>{{postItem.text}}</p>
+        <img v-if="postItem.postimage!=null" :src="postItem.postimage" alt="Content Image">
+        <p>{{ postItem.text }}</p>
       </div>
     <div class="post-bottom">
       <div class="comment-container">
@@ -26,22 +26,40 @@
 <script>
 export default {
 name: "PostCompo",
-data: function() {
+data() {
   return {
-  }},
-  computed: {
-    postsList() {
-      return this.$store.state.postsList
-    }
-  },
+    postList: [],
+  };
+},
   methods: {
-    increment(postID) {
-      this.$store.commit("increment", postID)
+    fetchPosts() {
+      fetch(`http://localhost:3000/api/posts/`)
+        .then((response) => response.json())
+        .then((data) => (this.postList = data))
+        .catch((err) => console.log(err.message));
     },
-    resetLikes() {
-      this.$store.commit("resetLikes")
-    }
-  }
+  },
+  mounted() {
+    this.fetchPosts();
+    console.log("mounted");
+  },
+// data: function() {
+//   return {
+//   }},
+//   computed: {
+//     postsList() {
+//       return this.$store.state.postsList
+//     }
+//   },
+//   methods: {
+
+//     increment(postID) {
+//       this.$store.commit("increment", postID)
+//     },
+//     resetLikes() {
+//       this.$store.commit("resetLikes")
+//     }
+//   }
 }
 </script>
 

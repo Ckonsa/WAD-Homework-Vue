@@ -15,8 +15,8 @@
     components: {HeaderCompo, LoginCompo, FooterCompo},
   }
   </script>
-  
-    <style scoped>
+
+<style scoped>
 .login-container {
         flex-grow: 2;
         display: flex;
@@ -29,11 +29,11 @@
         border-radius: 15px;
         border: none;
     }
-  
-    @media screen and (max-width: 550px) {
-    .login-container {
-          margin: 50px;
-      }
-  }
-  </style>
+
+@media screen and (max-width: 550px) {
+  .login-container {
+        margin: 50px;
+    }
+}
+</style>
   

@@ -46,7 +46,8 @@ app.post('/api/posts', async(req, res) => {
         console.log("a post request has arrived");
         const post = req.body;
         const newpost = await pool.query(
-            "INSERT INTO posttable(title, body, urllink) values ($1, $2, $3)    RETURNING*", [post.title, post.body, post.urllink]
+            "INSERT INTO posttable(authorIcon, createTime, text, postimage, likes) values ($1, $2, $3, $4, $5)    RETURNING*",
+             [post.authorIcon, post.createTime, post.text, post.postimage, post.likes]
         );
         res.json(newpost);
     } catch (err) {
@@ -61,6 +62,7 @@ app.get('/api/posts', async(req, res) => {
             "SELECT * FROM posttable"
         );
         res.json(posts.rows);
+        // console.log(posts.rows);
     } catch (err) {
         console.error(err.message);
     }
