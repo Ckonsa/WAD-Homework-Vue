@@ -1,5 +1,5 @@
 <template>
-<form @submit.prevent="validateSignup" class="signup-form">
+<form class="signup-form">
     <div class="form-control">
     <label for="email">Email</label>
     <input type="email" v-model="email" placeholder="e.g. martha.doe@gmail.com" required />
@@ -9,7 +9,7 @@
     <input type="password" v-model="password" placeholder="e.g. C2VE+td#wZ_m4" required/>
     </div>
     <div v-if="invalidPasswordMsg" class="invalid-password-message">{{invalidPasswordMsg}}</div>
-    <input type="submit" value="Signup" class="btn btn-block" />
+    <input @click="signUp" type="submit" value="Signup" class="btn btn-block" />
 </form>
 <div class="toLoginSection">
     <p>Already have an account?</p>
@@ -18,74 +18,72 @@
 </template>
 
 <script>
-  export default {
-    name : 'SignupCompo',
-    data (){
-      return {
-        email : '',
-        password : '',
-        invalidPasswordMsg : '',
-      }
-    },
-    methods : {
-      signUp: function(){
-        var data = {
-          email: this.email,
-          password: this.password
-        };
-        // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
-        fetch("http://localhost:3000/auth/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-            credentials: 'include', //  Don't forget to specify this if you need cookies
-            body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          this.$router.push("/");
-          //location.assign("/");
-        })
-        .catch((e) => {
-          console.log(e);
-          console.log("error");
-        });
-      },
-      validateSignup() {
-        console.log("Email:" + this.email)
-        console.log("Password:" + this.password)
-        this.invalidPasswordMsg = ''
-        // The password should be of a specific length (at least 8 chars and less than 15 chars).
-        if (this.password.length < 8 || this.password.length >= 15) {
-            this.invalidPasswordMsg += 'Password must be between 8-14 characters.\n'
-        }
-        // It should start with an uppercase alphabet.
-        // Includes at least one uppercase alphabet character.
-        const regex_begin = /^[A-Z]/
-        if (!regex_begin.test(this.password)) {
-            this.invalidPasswordMsg += 'Password must begin with an uppercase letter.\n'
-        }
-        // Includes at least two lowercase alphabet characters.
-        const regex_lower = /[a-z].*[a-z]/
-        if (!regex_lower.test(this.password)) {
-            this.invalidPasswordMsg += 'Password must contain at least 2 lowercase letters.\n'
-        }
-        // Includes at least one numeric value.
-        const regex_num = /\d/
-        if (!regex_num.test(this.password)) {
-            this.invalidPasswordMsg += 'Password must contain a number.\n'
-        }
-        // It should include the character “_”
-        const regex_line = /_/
-        if (!regex_line.test(this.password)) {
-            this.invalidPasswordMsg += "Password must contain a character '_'.\n"
-        }
-        // Don't try to sign up if the password isn't valid
-        if (this.invalidPasswordMsg.length > 0) return;
-        // Send a signup attempt to server
-        this.signUp()
+    export default {
+        name : 'SignupCompo',
+        data: function() {
+            return {
+                email : '',
+                password : '',
+                invalidPasswordMsg : '',
+            }
+        },
+        watch: {
+            password(value) {
+                this.password = value;
+                this.validateSignup(value);
+            }
+        },
+        methods : {
+            validateSignup() {
+                console.log("Email:" + this.email)
+                console.log("Password:" + this.password)
+                this.invalidPasswordMsg = ''
+                // The password should be of a specific length (at least 8 chars and less than 15 chars).
+                if (this.password.length < 8 || this.password.length >= 15) {
+                    this.invalidPasswordMsg += 'Password must be between 8-14 characters.\n'
+                }
+                // It should start with an uppercase alphabet.
+                // Includes at least one uppercase alphabet character.
+                const regex_begin = /^[A-Z]/
+                if (!regex_begin.test(this.password)) {
+                    this.invalidPasswordMsg += 'Password must begin with an uppercase letter.\n'
+                }
+                // Includes at least two lowercase alphabet characters.
+                const regex_lower = /[a-z].*[a-z]/
+                if (!regex_lower.test(this.password)) {
+                    this.invalidPasswordMsg += 'Password must contain at least 2 lowercase letters.\n'
+                }
+                // Includes at least one numeric value.
+                const regex_num = /\d/
+                if (!regex_num.test(this.password)) {
+                    this.invalidPasswordMsg += 'Password must contain a number.\n'
+                }
+                // It should include the character “_”
+                const regex_line = /_/
+                if (!regex_line.test(this.password)) {
+                    this.invalidPasswordMsg += "Password must contain a character '_'.\n"
+                }
+            },
+            signUp() {
+                var data = {
+                    email: this.email,
+                    password: this.password
+                };
+                fetch("http://localhost:3000/auth/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then(() => {
+                    this.$router.push("/");
+                })
+                .catch((e) => {
+                    console.log("Error "+e);
+                })
       }
     }
   }
