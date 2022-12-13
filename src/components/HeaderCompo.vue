@@ -2,17 +2,17 @@
     <header>
         <router-link to="/">HOME</router-link>
         <router-link v-if="authResult === true" to="/addpost">ADD POST</router-link>
-        <router-link to="/signup">REGISTER</router-link>
+        <!--<router-link to="/signup">REGISTER</router-link>-->
         <router-link to="/contact">CONTACT</router-link>
         <div v-if="authResult === true" class="dropdown">
             <img class="icon" src="@/assets/images/default-account.png" alt="Icon" @click="toggle">
-            <div class="dropdown_list" v-if="showList">
+            <!--<div class="dropdown_list" v-if="showList">
             <ul>
-                <!--<li>Martha Doe</li>-->
+                <li>Martha Doe</li>
                 <li>john.doe@gmail.com</li>
-                <!--<li>Logout</li>-->
+                <li>Logout</li>
             </ul>
-            </div>
+            </div>-->
         </div>
     </header>
 </template>
@@ -25,7 +25,7 @@ import auth from "../auth";
         data() {
             return {
                 showList: false,
-                authResult: auth.authenticated()
+                authResult: auth.user.authenticated
             }
         },
         methods: {
@@ -65,7 +65,7 @@ header a:hover {
     border-radius: 50%;
     border-style: dotted;
     border-color: var(--almost-white);
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 .dropdown > .icon {
     width: 100%;
@@ -86,7 +86,7 @@ header a:hover {
     list-style-type: none;
     padding: 5px;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
     header {
         display: flex;
         flex-direction: column;
