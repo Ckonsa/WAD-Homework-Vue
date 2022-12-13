@@ -1,12 +1,17 @@
 <template>
+  <button class="centeredButton" @click="logout">Logout</button>
   <div class="post" v-for="postItem in postList" :key="postItem.id">
       <div class="post-top">
-        <img class="icon" :src="postItem.authoricon" alt="Icon">
+        <!-- Couldn't get dynamic src to work with paths loaded from database
+         (v-bind:src), using default image -->
+        <img class="icon" src="@/assets/images/student2.png" alt="Icon">
         <p>{{ postItem.createtime }}</p>
       </div>
 
       <div class="post-content">
-        <img v-if="postItem.postimage!=null" :src="postItem.postimage" alt="Content Image">
+        <!-- Couldn't get dynamic src to work with paths loaded from database
+         (v-bind:src), using default image -->
+        <img v-if="postItem.postimage!=null" src="@/assets/images/postImage.jpg" alt="Content Image">
         <p>{{ postItem.text }}</p>
       </div>
     <div class="post-bottom">
@@ -20,7 +25,8 @@
       </div>
     </div>
   </div>
-  <button class="resetLikesButton" @click="resetLikes">Reset likes</button>
+  <!-- <button class="centeredButton" @click="resetLikes">Reset likes</button> -->
+  <button class="centeredButton" @click="deletePosts">Delete posts</button>
 </template>
 
 <script>
@@ -37,6 +43,35 @@ data() {
         .then((response) => response.json())
         .then((data) => (this.postList = data))
         .catch((err) => console.log(err.message));
+    },
+    deletePosts() {
+      let options = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+      }
+      fetch(`http://localhost:3000/api/posts/`, options)
+        .then((response) => window.location.reload())
+        .catch((err) => console.log(err.message));
+    },
+    logout() {
+      fetch(`http://localhost:3000/auth/logout/`, {
+        credentials: 'include',
+      })
+      .then((data) => {
+        console.log(data);
+        console.log('jwt removed');
+        //console.log('jwt removed:' + auth.authenticated());
+        this.$router.push("/login");
+        //location.assign("/");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error logout");
+      });
+    },
+    increment(postID) {
     },
   },
   mounted() {
@@ -66,7 +101,7 @@ data() {
 
 <style scoped>
 
-.resetLikesButton {
+.centeredButton {
   display: flex;
   justify-self: center;
   width: 100px;

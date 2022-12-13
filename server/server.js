@@ -62,10 +62,21 @@ app.get('/api/posts', async(req, res) => {
             "SELECT * FROM posttable"
         );
         res.json(posts.rows);
-        // console.log(posts.rows);
     } catch (err) {
         console.error(err.message);
     }
+});
+
+app.delete('/api/posts', async(req, res) => {
+  try {
+      console.log("delete all posts request has arrived");
+      const deletepost = await pool.query(
+          "DELETE FROM posttable * RETURNING*"
+      );
+      res.json(deletepost);
+  } catch (err) {
+      console.error(err.message);
+  }
 });
 
 app.get('/api/posts/:id', async(req, res) => {
