@@ -25,8 +25,12 @@
       </div>
     </div>
   </div>
-  <!-- <button class="centeredButton" @click="resetLikes">Reset likes</button> -->
-  <button class="centeredButton" @click="deletePosts">Delete posts</button>
+  <div class="buttons">
+    <!-- <button class="centeredButton" @click="resetLikes">Reset likes</button> -->
+    <button class="centeredButton"><router-link to="/addpost"><a>Add post</a></router-link></button>
+    <button class="centeredButton" @click="deletePosts">Delete posts</button>
+  </div>
+  
 </template>
 
 <script>
@@ -52,7 +56,7 @@ data() {
         },
       }
       fetch(`http://localhost:3000/api/posts/`, options)
-        .then((response) => window.location.reload())
+        .then(() => window.location.reload())
         .catch((err) => console.log(err.message));
     },
     logout() {
@@ -63,15 +67,15 @@ data() {
         console.log(data);
         console.log('jwt removed');
         //console.log('jwt removed:' + auth.authenticated());
-        this.$router.push("/login");
-        //location.assign("/");
+        //this.$router.push("/login");
+        location.assign("/");
       })
       .catch((e) => {
         console.log(e);
         console.log("error logout");
       });
     },
-    increment(postID) {
+    increment() {
     },
   },
   mounted() {
@@ -112,6 +116,23 @@ data() {
   text-align: center;
   display:table-cell;
   vertical-align:middle;
+  text-decoration:double;
+  cursor: pointer;
+}
+
+.centeredButton a {
+  text-decoration: none;
+}
+
+.centeredButton:hover {
+  background-color: var(--header-footer-hover-blue);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .post {

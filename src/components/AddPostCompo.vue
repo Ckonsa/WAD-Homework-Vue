@@ -1,6 +1,7 @@
 <template>
     <div></div>
     <div class="addPost-container">
+        <p>Add Post</p>
         <form class="addPost-form" action="../index.html">
             <div class="form-content">
                 <label for="post-body" class="post-body-label">Post body</label>
@@ -10,11 +11,11 @@
                 <label for="file">Select file</label>
                 <input type="file" id="file" name="file">
             </div> -->
-            <div class="form-content">
+            <!--<div class="form-content">
                 <p>Select file</p>
                 <label for="file" class="form-file-upload-button">Choose File</label>
                 <input type="file" id="file" name="file">
-            </div>
+            </div>-->
             <div class="form-submit">
                 <input type="submit" class="submit-form" value="Create post">
             </div>
@@ -31,6 +32,7 @@ name : 'AddPostCompo'
 </script>
 
 <style scoped>
+
 .addPost-container {
     flex-grow: 2;
     display: flex;
@@ -46,6 +48,11 @@ name : 'AddPostCompo'
     background-color: var(--post-top-bottom-blue);
     border-radius: 15px;
     border: none;
+}
+
+p {
+    font-size: 25px;
+    align-self: center;
 }
 
 .form-content {
@@ -69,6 +76,7 @@ name : 'AddPostCompo'
     font-size: 20px;
     text-align: right;
     margin-right: 15px;
+    margin-top: 12px;
 }
 
 .form-content > p {
@@ -81,7 +89,7 @@ name : 'AddPostCompo'
 
 #post-body {
     width: 100%;
-    height: 80px;
+    height: 50px;
 }
 
 .form-content > input[type=file] {
@@ -114,8 +122,8 @@ name : 'AddPostCompo'
     cursor: pointer;
 }
 
-.hidden {
-    display: none;
+.submit-form:hover {
+    background-color: var(--dark-blue);
 }
 
 @media screen and(max-width: 480px) {
