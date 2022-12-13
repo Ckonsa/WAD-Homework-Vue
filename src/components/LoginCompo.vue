@@ -18,7 +18,7 @@
     
 <script>
 export default {
-name : 'SignupCompo',
+name : 'LoginCompo',
 data: function() {
     return {
   email: '',

@@ -1,7 +1,7 @@
 <template>
     <header>
         <router-link to="/">HOME</router-link>
-        <router-link v-if="authResult === true" to="/">ADD POST</router-link>
+        <router-link v-if="authResult === true" to="/addpost">ADD POST</router-link>
         <router-link to="/signup">REGISTER</router-link>
         <router-link to="/contact">CONTACT</router-link>
         <div v-if="authResult === true" class="dropdown">
