@@ -15,7 +15,7 @@ const routes = [{
         beforeEnter: async(to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {
-                next('/login')
+                next('/login');
             } else {
                 next();
             }
@@ -43,7 +43,7 @@ const routes = [{
         beforeEnter: async(to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {
-                next('/login')
+                next('/login');
             } else {
                 next();
             }
@@ -56,7 +56,7 @@ const routes = [{
         beforeEnter: async(to, from, next) => {
             let authResult = await auth.authenticated();
             if (!authResult) {
-                next('/login')
+                next('/login');
             } else {
                 next();
             }

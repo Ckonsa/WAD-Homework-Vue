@@ -13,7 +13,7 @@
   import HeaderCompo from "@/components/HeaderCompo";
   import FooterCompo from "@/components/FooterCompo";
   import ContactCompo from "@/components/ContactCompo";
-  import SideCompo from "@/components/SideCompo.vue";
+  import SideCompo from "@/components/SideCompo";
   export default {
     name: "ContactView",
     components: {HeaderCompo, ContactCompo, SideCompo, FooterCompo},

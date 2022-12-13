@@ -1,4 +1,4 @@
-const createExamplePosts = true;
+const createExamplePosts = false;
 
 const Pool = require('pg').Pool;
 
@@ -24,13 +24,10 @@ const execute = async(query) => {
 };
 
 const createPosttasbleQuery = `
-    CREATE TABLE IF NOT EXISTS "posttable" (
-	    "id" SERIAL PRIMARY KEY,         
-	    "authoricon" VARCHAR(200) NOT NULL,
-	    "createtime" VARCHAR(200) NOT NULL,
-	    "text" VARCHAR(400) NOT NULL,
-	    "postimage" VARCHAR(200),
-      "likes" INT
+  CREATE TABLE IF NOT EXISTS "posttable" (
+	    id SERIAL PRIMARY KEY,         
+	    createtime VARCHAR(200) NOT NULL,
+	    text VARCHAR(400) NOT NULL
     );`;
 
 const createUsersTableQuery = `
@@ -44,25 +41,25 @@ const createUsersTableQuery = `
 const addExamplePosts = async(examplePosts) => {
   if (createExamplePosts == false) return;
   examplePosts = [
-    {id: 1, authorIcon: "/assets/images/student2.png",createTime: "Nov 22, 2022", text: "OOPS! Seems like I'm a little late:(((", postimage: "@/assets/images/postImage2.jpg", likes: 0},
-    {id: 2, authorIcon: "/assets/images/student3.png",createTime: "Nov 10, 2022", text: "Anyone knows in which room is the lab today!?", postimage: null, likes: 23},
-    {id: 3, authorIcon: "/assets/images/student.png",createTime: "Oct 31, 2022", text: "My table is sooooo crowded", postimage: "@/assets/images/postImage.jpg", likes: 10},
-    {id: 4, authorIcon: "/assets/images/student5.png",createTime: "Oct 27, 2022", text: "I was thinking about starting a sleeping blog, what do you guys think??", postimage: null, likes: 14},
-    {id: 5, authorIcon: "/assets/images/student5.png",createTime: "Oct 16, 2022", text: "I made my profile picture the one that was taken of me sleeping haha", postimage: null, likes: 64},
-    {id: 6, authorIcon: "@/assets/images/student3.png",createTime: "Oct 16, 2022", text: "Sorry, forgot to add it to the last post lol", postimage: "@/assets/images/sleeping-man.jpg", likes: 56},
-    {id: 7, authorIcon: "@/assets/images/student3.png",createTime: "Oct 16, 2022", text: "Did you guys see the new photo?!!", postimage: null, likes: 3},
-    {id: 8, authorIcon: "@/assets/images/student.png",createTime: "Sept 29, 2022", text: "Study date with my bestiess! :D", postimage: "@/assets/images/students.jpg", likes: 99},
-    {id: 9, authorIcon: "@/assets/images/student2.png",createTime: "Sept 28, 2022", text: "Why do I keep missing my class???", postimage: null, likes: 3},
-    {id: 10, authorIcon: "@/assets/images/student4.png",createTime: "Sept 12, 2022", text: "Look, a pic of my cat! <33", postimage: "@/assets/images/kitten.jpg", likes: 100}
+    {id: 1, createTime: "Nov 22, 2022", text: "OOPS! Seems like I'm a little late:((("},
+    {id: 2, createTime: "Nov 10, 2022", text: "Anyone knows in which room is the lab today!?"},
+    {id: 3, createTime: "Oct 31, 2022", text: "My table is sooooo crowded"},
+    {id: 4, createTime: "Oct 27, 2022", text: "I was thinking about starting a sleeping blog, what do you guys think??"},
+    {id: 5, createTime: "Oct 16, 2022", text: "Can anyone bring me some coffee??"},
+    {id: 6, createTime: "Oct 16, 2022", text: "Thinking of life #deep"},
+    {id: 7, createTime: "Oct 16, 2022", text: "Did you guys see the new photo?!!"},
+    {id: 8, createTime: "Sept 29, 2022", text: "Study date with my bestiess! :D"},
+    {id: 9, createTime: "Sept 28, 2022", text: "Why do I keep missing my class???"},
+    {id: 10, createTime: "Sept 12, 2022", text: "I love my cat soooooo much! <33"}
   ]
   try {
     for (let i = 0; i < examplePosts.length; i++) {
       const post = examplePosts[i]
-      const newpost = await pool.query(
-          "INSERT INTO posttable(authoricon, createtime, text, postimage, likes) values ($1, $2, $3, $4, $5)    RETURNING*",
-            [post.authorIcon, post.createTime, post.text, post.postimage, post.likes]
+      await pool.query(
+          "INSERT INTO posttable(createtime, text) values ($1, $2)    RETURNING*",
+          [post.createTime, post.text]
       );
-      console.log('Created example post');
+      console.log('Example post created');
     }
   }
   catch (err) {

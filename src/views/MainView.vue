@@ -2,9 +2,7 @@
     <HeaderCompo></HeaderCompo>
     <div class="flexbox-container">
         <SideCompo></SideCompo>
-        <div class="posts-container">
         <PostCompo></PostCompo>
-        </div>
         <SideCompo></SideCompo>
     </div>
     <FooterCompo></FooterCompo>
@@ -35,19 +33,5 @@ export default {
     display: flex;
     justify-content: space-between;
     align-content: stretch;
-}
-.posts-container {
-    flex-grow: 2;
-    max-width: 600px;
-    margin: 15px;
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 15px;
-}
-@media screen and (max-width: 480px) {
-  .posts-container {
-        margin: 10px 0 0;
-        row-gap: 10px;
-    }
 }
 </style>

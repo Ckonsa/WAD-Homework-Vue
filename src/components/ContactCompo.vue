@@ -86,7 +86,7 @@
     </p>
     <h3>How to contact us?</h3>
     <p>
-    Email: fakeName.fakeName2@gmail.com
+    Email: fakeName1.fakeName2@gmail.com
     <br>
     Phone: +372 5123 4567
     <br>

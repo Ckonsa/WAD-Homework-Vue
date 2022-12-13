@@ -1,26 +1,22 @@
 <template>
+<div class="posts-container">
   <button class="centeredButton" @click="logout">Logout</button>
   <div class="post" v-for="postItem in postList" :key="postItem.id">
       <div class="post-top">
-        <!-- Couldn't get dynamic src to work with paths loaded from database
-         (v-bind:src), using default image -->
-        <img class="icon" src="@/assets/images/student2.png" alt="Icon">
+        <img class="icon" src="@/assets/images/default-comment.png" alt="Icon">
         <p>{{ postItem.createtime }}</p>
       </div>
-
       <div class="post-content">
-        <!-- Couldn't get dynamic src to work with paths loaded from database
-         (v-bind:src), using default image -->
-        <img v-if="postItem.postimage!=null" src="@/assets/images/postImage.jpg" alt="Content Image">
+        <!--<img v-if="postItem.postimage!=null" src="@/assets/images/postImage.jpg" alt="Content Image">-->
         <p>{{ postItem.text }}</p>
       </div>
     <div class="post-bottom">
       <div class="comment-container">
-        <img class="icon" src="@/assets/images/student.png" alt="Icon">
+        <img class="icon" src="@/assets/images/default-account.png" alt="Icon">
         <input class="comment" type="text" placeholder="Write a comment...">
       </div>
       <div class="likes">
-        <img @click="increment(postItem.id)" src="@/assets/images/like-icon.png" alt="Like Button">
+        <img src="@/assets/images/like-icon.png" alt="Like Button">
         <p>{{ postItem.likes }}</p>
       </div>
     </div>
@@ -30,7 +26,7 @@
     <button class="centeredButton"><router-link to="/addpost"><a>Add post</a></router-link></button>
     <button class="centeredButton" @click="deletePosts">Delete posts</button>
   </div>
-  
+</div>
 </template>
 
 <script>
@@ -68,19 +64,16 @@ data() {
         console.log('jwt removed');
         //console.log('jwt removed:' + auth.authenticated());
         //this.$router.push("/login");
-        location.assign("/");
+        location.assign("/login");
       })
       .catch((e) => {
         console.log(e);
         console.log("error logout");
       });
-    },
-    increment() {
-    },
+    }
   },
   mounted() {
     this.fetchPosts();
-    console.log("mounted");
   },
 // data: function() {
 //   return {
@@ -105,6 +98,14 @@ data() {
 
 <style scoped>
 
+.posts-container {
+    flex-grow: 2;
+    max-width: 600px;
+    margin: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+}
 .centeredButton {
   display: flex;
   justify-self: center;
@@ -208,6 +209,10 @@ data() {
 }
 
 @media screen and (max-width: 480px) {
+.posts-container {
+  margin: 10px 0 0;
+  row-gap: 10px;
+}
 .comment {
   width: auto;
 }

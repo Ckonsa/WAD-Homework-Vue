@@ -1,4 +1,5 @@
 <template>
+<div class=signup-container>
 <form class="signup-form">
     <div class="form-control">
     <label for="email">Email</label>
@@ -14,6 +15,7 @@
 <div class="toLoginSection">
     <p>Already have an account?</p>
     <button class="goToLogin"><router-link to="/login"><a>Login</a></router-link></button>
+</div>
 </div>
 </template>
 
@@ -90,6 +92,19 @@
 </script>
 
 <style scoped>
+.signup-container {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    align-content: center;
+    justify-self: center;
+    margin: 50px 20% 50px 20%;
+    background-color: var(--post-top-bottom-blue);
+    border-radius: 15px;
+    border: none;
+}
+
 .signup-form {
     display: flex;
     flex-direction: column;
@@ -151,6 +166,12 @@ a {
         padding: 3px;
         width: 50%;
         cursor: pointer;
+}
+
+@media screen and (max-width: 550px) {
+    .signup-container {
+        margin: 50px;
+    }
 }
 
 @media screen and (max-width: 375px) {
