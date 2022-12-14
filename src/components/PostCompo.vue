@@ -2,12 +2,12 @@
   <div class="posts-container">
     <button class="centeredButton" @click="logout">Logout</button>
     <div class="post" v-for="postItem in postList" :key="postItem.id">
-      <router-link :to="'/editpost/' + postItem.id">
-        <div class="post-top">
+      <!--Added click event to the post top and content, so the post bottom with comment section and like button would still be functional-->
+        <div @click="toEditView(postItem.id)" class="post-top"> 
           <img class="icon" src="@/assets/images/default-comment.png" alt="Icon">
           <p>{{ postItem.createtime }}</p>
         </div>
-        <div class="post-content">
+        <div @click="toEditView(postItem.id)" class="post-content">
           <!--<img v-if="postItem.postimage!=null" src="@/assets/images/postImage.jpg" alt="Content Image">-->
           <p>{{ postItem.text }}</p>
         </div>
@@ -21,7 +21,6 @@
             <p>{{ postItem.likes }}</p>
           </div>
         </div>
-      </router-link>
     </div>
     <div class="buttons">
       <!-- <button class="centeredButton" @click="resetLikes">Reset likes</button> -->
@@ -40,6 +39,9 @@ export default {
     };
   },
   methods: {
+    toEditView(id) {
+      this.$router.push("/editpost/"+id);
+    },
     fetchPosts() {
       fetch(`http://localhost:3000/api/posts/`)
         .then((response) => response.json())
@@ -217,6 +219,7 @@ export default {
   height: 40px;
   padding-bottom: 10px;
   padding-right: 5px;
+  cursor: pointer;
 }
 
 .hiddenText {

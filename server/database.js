@@ -41,16 +41,16 @@ const createUsersTableQuery = `
 const addExamplePosts = async(examplePosts) => {
   if (createExamplePosts == false) return;
   examplePosts = [
-    {id: 1, createTime: "Nov 22, 2022", text: "OOPS! Seems like I'm a little late:((("},
-    {id: 2, createTime: "Nov 10, 2022", text: "Anyone knows in which room is the lab today!?"},
-    {id: 3, createTime: "Oct 31, 2022", text: "My table is sooooo crowded"},
-    {id: 4, createTime: "Oct 27, 2022", text: "I was thinking about starting a sleeping blog, what do you guys think??"},
-    {id: 5, createTime: "Oct 16, 2022", text: "Can anyone bring me some coffee??"},
-    {id: 6, createTime: "Oct 16, 2022", text: "Thinking of life #deep"},
-    {id: 7, createTime: "Oct 16, 2022", text: "Did you guys see the new photo?!!"},
-    {id: 8, createTime: "Sept 29, 2022", text: "Study date with my bestiess! :D"},
-    {id: 9, createTime: "Sept 28, 2022", text: "Why do I keep missing my class???"},
-    {id: 10, createTime: "Sept 12, 2022", text: "I love my cat soooooo much! <33"}
+    {id: 1, createTime: "2022/11/22", text: "OOPS! Seems like I'm a little late:((("},
+    {id: 2, createTime: "2022/11/10", text: "Anyone knows in which room is the lab today!?"},
+    {id: 3, createTime: "2022/10/31", text: "My table is sooooo crowded"},
+    {id: 4, createTime: "2022/10/27", text: "I was thinking about starting a sleeping blog, what do you guys think??"},
+    {id: 5, createTime: "2022/10/16", text: "Can anyone bring me some coffee??"},
+    {id: 6, createTime: "2022/10/16", text: "Thinking of life #deep"},
+    {id: 7, createTime: "2022/10/16", text: "Did you guys see the new photo?!!"},
+    {id: 8, createTime: "2022/9/29", text: "Study date with my bestiess! :D"},
+    {id: 9, createTime: "2022/9/28", text: "Why do I keep missing my class???"},
+    {id: 10, createTime: "2022/9/12", text: "I love my cat soooooo much! <33"}
   ]
   try {
     for (let i = 0; i < examplePosts.length; i++) {
