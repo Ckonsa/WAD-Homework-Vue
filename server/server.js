@@ -158,4 +158,4 @@ app.get('/auth/logout', (req, res) => {
 
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
-});
+}); 
