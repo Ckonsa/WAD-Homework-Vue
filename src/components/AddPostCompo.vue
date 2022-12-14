@@ -5,19 +5,11 @@
         <form class="addPost-form" action="../index.html">
             <div class="form-content">
                 <label for="post-body" class="post-body-label">Post body</label>
-                <input type="text" id="post-body" name="post-body" placeholder="Enter text...">
+                <input type="text" id="post-body" required v-model="post.text" name="post-body"
+                    placeholder="Enter text...">
             </div>
-            <!-- <div class="form-content">
-                <label for="file">Select file</label>
-                <input type="file" id="file" name="file">
-            </div> -->
-            <!--<div class="form-content">
-                <p>Select file</p>
-                <label for="file" class="form-file-upload-button">Choose File</label>
-                <input type="file" id="file" name="file">
-            </div>-->
             <div class="form-submit">
-                <input type="submit" class="submit-form" value="Create post">
+                <input @click="addPost" type="submit" class="submit-form" value="Create post">
             </div>
         </form>
     </div>
@@ -27,12 +19,40 @@
 
 <script>
 export default {
-name : 'AddPostCompo'
-}
+    name: 'AddPostCompo',
+    data: function () {
+        return {
+            post: {
+                text: "",
+            },
+        };
+    },
+    methods: {
+        addPost() {
+            var data = {
+                text: this.post.text,
+            };
+            fetch("http://localhost:3000/api/posts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    this.$router.push("/api/allposts");
+                })
+                .catch((e) => {
+                    console.log(e);
+                    console.log("error");
+                });
+        },
+    },
+};
 </script>
 
 <style scoped>
-
 .addPost-container {
     flex-grow: 2;
     display: flex;
@@ -70,7 +90,7 @@ p {
     padding: 10px;
 }
 
-.form-content > .post-body-label {
+.form-content>.post-body-label {
     width: 50%;
     height: 30px;
     font-size: 20px;
@@ -79,7 +99,7 @@ p {
     margin-top: 12px;
 }
 
-.form-content > p {
+.form-content>p {
     width: 50%;
     height: 30px;
     font-size: 20px;
@@ -92,7 +112,7 @@ p {
     height: 50px;
 }
 
-.form-content > input[type=file] {
+.form-content>input[type=file] {
     display: none;
 }
 
@@ -130,9 +150,11 @@ p {
     .form-content {
         margin: 5%;
     }
+
     .submit-form {
         width: fit-content;
     }
+
     .form-file-upload-button {
         height: fit-content;
     }

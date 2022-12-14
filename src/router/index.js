@@ -8,60 +8,60 @@ import EditPostView from '@/views/EditPostView.vue'
 import auth from "../auth"
 
 const routes = [{
-        path: '/',
-        name: 'MainView',
-        component: MainView,
-        alias:'/main',
-        beforeEnter: async(to, from, next) => {
-            let authResult = await auth.authenticated();
-            if (!authResult) {
-                next('/login');
-            } else {
-                next();
-            }
+    path: '/',
+    name: 'MainView',
+    component: MainView,
+    alias: '/main',
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) {
+            next('/login');
+        } else {
+            next();
         }
-    },
-    {
-        path: '/signup',
-        name: 'SignupView',
-        component: SignupView
-    },
-    {
-        path: "/login",
-        name: "LogInView",
-        component: LogInView,
-    },
-    {
-        path: "/contact",
-        name: "ContactView",
-        component: ContactView,
-    },
-    {
-        path: "/addPost",
-        name: "AddPostView",
-        component: AddPostView,
-        beforeEnter: async(to, from, next) => {
-            let authResult = await auth.authenticated();
-            if (!authResult) {
-                next('/login');
-            } else {
-                next();
-            }
+    }
+},
+{
+    path: '/signup',
+    name: 'SignupView',
+    component: SignupView
+},
+{
+    path: "/login",
+    name: "LogInView",
+    component: LogInView,
+},
+{
+    path: "/contact",
+    name: "ContactView",
+    component: ContactView,
+},
+{
+    path: "/addPost",
+    name: "AddPostView",
+    component: AddPostView,
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) {
+            next('/login');
+        } else {
+            next();
         }
-    },
-    {
-        path: "/editPost",
-        name: "EditPostView",
-        component: EditPostView,
-        beforeEnter: async(to, from, next) => {
-            let authResult = await auth.authenticated();
-            if (!authResult) {
-                next('/login');
-            } else {
-                next();
-            }
+    }
+},
+{
+    path: "/editPost/:id",
+    name: "EditPostView",
+    component: EditPostView,
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) {
+            next('/login');
+        } else {
+            next();
         }
-    },
+    }
+},
 ]
 
 const router = createRouter({

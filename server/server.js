@@ -20,20 +20,20 @@ const generateJWT = (id) => {
     return jwt.sign({ id }, secret, { expiresIn: maxAge })
 }
 
-app.get('/auth/authenticate', async(req, res) => {
+app.get('/auth/authenticate', async (req, res) => {
     const token = req.cookies.jwt;
-    let authenticated = false; 
+    let authenticated = false;
     try {
         if (token) {
-            await jwt.verify(token, secret, (err) => { 
-                if (err) { 
+            await jwt.verify(token, secret, (err) => {
+                if (err) {
                     res.send({ "authenticated": authenticated }); // authenticated = false
-                } else { 
+                } else {
                     authenticated = true;
                     res.send({ "authenticated": authenticated }); // authenticated = true
                 }
             })
-        } else { 
+        } else {
             res.send({ "authenticated": authenticated }); // authenticated = false
         }
     } catch (err) {
@@ -41,12 +41,12 @@ app.get('/auth/authenticate', async(req, res) => {
     }
 });
 
-app.post('/api/posts', async(req, res) => {
+app.post('/api/posts', async (req, res) => {
     try {
         const post = req.body;
         const newpost = await pool.query(
             "INSERT INTO posttable(createTime, text) values ($1, $2)    RETURNING*",
-            [new Date().toJSON().slice(0,10).replace(/-/g,'/'), post.text]
+            [new Date().toJSON().slice(0, 10).replace(/-/g, '/'), post.text]
         );
         res.json(newpost);
     } catch (err) {
@@ -54,7 +54,7 @@ app.post('/api/posts', async(req, res) => {
     }
 });
 
-app.get('/api/posts', async(req, res) => {
+app.get('/api/posts', async (req, res) => {
     try {
         const posts = await pool.query(
             "SELECT * FROM posttable"
@@ -65,18 +65,18 @@ app.get('/api/posts', async(req, res) => {
     }
 });
 
-app.delete('/api/posts', async(req, res) => {
+app.delete('/api/posts', async (req, res) => {
     try {
         const deletepost = await pool.query(
             "DELETE FROM posttable * RETURNING*"
         );
         res.json(deletepost);
     } catch (err) {
-    console.error(err.message);
+        console.error(err.message);
     }
 });
 
-app.get('/api/posts/:id', async(req, res) => {
+app.get('/api/posts/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const posts = await pool.query(
@@ -88,12 +88,13 @@ app.get('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.put('/api/posts/:id', async(req, res) => {
+app.put('/api/posts/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const post = req.body;
+        console.log("update request has arrived");
         const updatepost = await pool.query(
-            "UPDATE posttable SET (text) = ($2) WHERE id = $1 RETURNING*", [id, post.body]
+            "UPDATE posttable SET text = $2 WHERE id = $1 RETURNING*", [id, post.text]
         );
         res.json(updatepost);
     } catch (err) {
@@ -101,7 +102,7 @@ app.put('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.delete('/api/posts/:id', async(req, res) => {
+app.delete('/api/posts/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const deletepost = await pool.query(
@@ -113,7 +114,7 @@ app.delete('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.post('/auth/signup', async(req, res) => {
+app.post('/auth/signup', async (req, res) => {
     try {
         const { email, password } = req.body;
         const salt = await bcrypt.genSalt();
@@ -134,7 +135,7 @@ app.post('/auth/signup', async(req, res) => {
     }
 });
 
-app.post('/auth/login', async(req, res) => {
+app.post('/auth/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);

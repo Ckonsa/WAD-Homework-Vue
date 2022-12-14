@@ -5,18 +5,9 @@
         <form class="addPost-form" action="../index.html">
             <div class="form-content">
                 <label for="post-body" class="post-body-label">Post body</label>
-                <input type="text" id="post-body" name="post-body" placeholder="Enter text...">
+                <input type="text" id="post-body" name="post-body" required v-model="post.text"
+                    placeholder="Enter text...">
             </div>
-            <!-- <div class="form-content">
-                <label for="file">Select file</label>
-                <input type="file" id="file" name="file">
-            </div> -->
-            <!--<div class="form-content">
-                <p>Select file</p>
-                <label for="file" class="form-file-upload-button">Choose File</label>
-                <input type="file" id="file" name="file">
-            </div>-->
-            
             <div class="form-submit">
                 <input @click="updatePost" type="submit" class="submit-form" value="Update Post">
                 <input @click="deletePost" type="submit" class="submit-form" value="Delete Post">
@@ -29,8 +20,61 @@
 
 <script>
 export default {
-name : 'EditPostCompo'
-}
+    name: "EditPostCompo",
+    data() {
+        return {
+            post: {
+                id: "",
+                createTime: "",
+                text: "",
+            },
+        };
+    },
+    methods: {
+        fetchAPost(id) {
+            fetch(`http://localhost:3000/api/posts/${id}`)
+                .then((response) => response.json())
+                .then((data) => (this.post = data))
+                .catch((err) => console.log(err.message));
+        },
+        updatePost() {
+            var data = {
+                text: this.post.text,
+            };
+            console.log(this.post.id)
+            fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    this.$router.push("/main/");
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        },
+        deletePost() {
+            fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    this.$router.push("/main");
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        },
+    },
+    mounted() {
+        this.fetchAPost(this.$route.params.id);
+    },
+};
 </script>
 
 <style scoped>
@@ -50,10 +94,12 @@ name : 'EditPostCompo'
     border-radius: 15px;
     border: none;
 }
+
 p {
     font-size: 25px;
     align-self: center;
 }
+
 .form-content {
     margin: 15px 25.5% 15px 15px;
     display: flex;
@@ -71,7 +117,7 @@ p {
     padding: 10px;
 }
 
-.form-content > .post-body-label {
+.form-content>.post-body-label {
     width: 50%;
     height: 30px;
     font-size: 20px;
@@ -80,7 +126,7 @@ p {
     margin-top: 12px;
 }
 
-.form-content > p {
+.form-content>p {
     width: 50%;
     height: 30px;
     font-size: 20px;
@@ -93,7 +139,7 @@ p {
     height: 50px;
 }
 
-.form-content > input[type=file] {
+.form-content>input[type=file] {
     display: none;
 }
 
@@ -122,6 +168,7 @@ p {
     font-weight: lighter;
     cursor: pointer;
 }
+
 .submit-form:hover {
     background-color: var(--dark-blue);
 }
@@ -130,9 +177,11 @@ p {
     .form-content {
         margin: 5%;
     }
+
     .submit-form {
         width: fit-content;
     }
+
     .form-file-upload-button {
         height: fit-content;
     }
